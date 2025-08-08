@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
@@ -24,6 +25,8 @@ import { shippingAddressTable } from "@/db/schema";
 import { useCreateShippingAddress } from "@/hooks/mutations/use-create-shipping-address";
 import { useUpdateCartShippingAddress } from "@/hooks/mutations/use-update-cart-shipping-address";
 import { useUserAddresses } from "@/hooks/queries/use-user-addresses";
+
+import { formatAddress } from "../../helpers/address";
 
 const formSchema = z.object({
   email: z.email("E-mail inválido"),
@@ -50,6 +53,7 @@ const Addresses = ({
   shippingAddresses,
   defaultShippingAddressId,
 }: AddressesProps) => {
+  const router = useRouter();
   const [selectedAddress, setSelectedAddress] = useState<string | null>(
     defaultShippingAddressId || null,
   );
@@ -102,6 +106,7 @@ const Addresses = ({
         shippingAddressId: selectedAddress,
       });
       toast.success("Endereço selecionado para entrega!");
+      router.push("/cart/confirmation");
     } catch (error) {
       toast.error("Erro ao selecionar endereço. Tente novamente.");
       console.error(error);
@@ -139,14 +144,7 @@ const Addresses = ({
                     <div className="flex-1">
                       <Label htmlFor={address.id} className="cursor-pointer">
                         <div>
-                          <p className="text-sm">
-                            {address.recipientName} • {address.street},{" "}
-                            {address.number}
-                            {address.complement &&
-                              `, ${address.complement}`}, {address.neighborhood}
-                            , {address.city} - {address.state} • CEP:{" "}
-                            {address.zipCode}
-                          </p>
+                          <p className="text-sm">{formatAddress(address)}</p>
                         </div>
                       </Label>
                     </div>
