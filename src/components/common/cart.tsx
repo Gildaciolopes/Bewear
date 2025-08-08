@@ -19,6 +19,7 @@ import {
 import CartItem from "./cart-item";
 
 export const Cart = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: cart, isPending: cartIsLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: () => getCart(),
@@ -34,6 +35,7 @@ export const Cart = () => {
         <SheetHeader>
           <SheetTitle>Carrinho</SheetTitle>
         </SheetHeader>
+
         <div className="flex h-full flex-col px-5 pb-5">
           <div className="flex h-full max-h-full flex-col overflow-hidden">
             <ScrollArea className="h-full">
@@ -42,6 +44,7 @@ export const Cart = () => {
                   <CartItem
                     key={item.id}
                     id={item.id}
+                    productVariantId={item.productVariant.id}
                     productName={item.productVariant.product.name}
                     productVariantName={item.productVariant.name}
                     productVariantImageUrl={item.productVariant.imageUrl}
@@ -86,5 +89,3 @@ export const Cart = () => {
     </Sheet>
   );
 };
-
-// SERVER ACTION
