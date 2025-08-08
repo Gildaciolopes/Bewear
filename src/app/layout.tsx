@@ -23,10 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={`${poppins.variable} antialiased`}>
         <ReactQueryProvider>{children}</ReactQueryProvider>
-        <Toaster />
+        <Toaster position="top-center" />
       </body>
     </html>
   );
