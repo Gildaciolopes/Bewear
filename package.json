@@ -35,6 +35,7 @@
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
     "react-number-format": "^5.4.4",
+    "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "stripe": "^18.4.0",
     "tailwind-merge": "^3.3.1",
