@@ -254,7 +254,7 @@ const categories = [
     description: "Mochilas, bonés, meias e outros acessórios",
   },
   {
-    name: "Bermuda & Shorts",
+    name: "Bermudas",
     description: "Bermudas e shorts para todas as ocasiões",
   },
   {
@@ -266,7 +266,7 @@ const categories = [
     description: "Camisetas casuais e esportivas",
   },
   {
-    name: "Jaquetas & Moletons",
+    name: "Jaquetas",
     description: "Jaquetas, corta-ventos e moletons",
   },
   {
@@ -317,12 +317,12 @@ const products = [
     ],
   },
 
-  // Bermuda & Shorts
+  // Bermudas
   {
     name: "Shorts Active",
     description:
       "Shorts esportivo para atividades físicas, com tecido que absorve o suor.",
-    categoryName: "Bermuda & Shorts",
+    categoryName: "Bermudas",
     variants: [
       { color: "Preto", price: 6999 },
       { color: "Azul", price: 6999 },
@@ -332,7 +332,7 @@ const products = [
   {
     name: "Shorts Core",
     description: "Shorts casual confortável, perfeito para o dia a dia.",
-    categoryName: "Bermuda & Shorts",
+    categoryName: "Bermudas",
     variants: [
       { color: "Verde", price: 5999 },
       { color: "Preto", price: 5999 },
@@ -343,7 +343,7 @@ const products = [
     name: "Shorts Challenger",
     description:
       "Shorts com design moderno e confortável, ideal para diversas ocasiões.",
-    categoryName: "Bermuda & Shorts",
+    categoryName: "Bermudas",
     variants: [
       { color: "Marrom", price: 7499 },
       { color: "Preto", price: 7499 },
@@ -354,7 +354,7 @@ const products = [
     name: "Bermuda Premier",
     description:
       "Bermuda premium com qualidade superior e design diferenciado.",
-    categoryName: "Bermuda & Shorts",
+    categoryName: "Bermudas",
     variants: [
       { color: "Verde", price: 8999 },
       { color: "Preta", price: 8999 },
@@ -451,12 +451,12 @@ const products = [
     ],
   },
 
-  // Jaquetas & Moletons
+  // Jaquetas
   {
     name: "Corta Vento",
     description:
       "Jaqueta corta-vento leve e resistente, ideal para atividades ao ar livre.",
-    categoryName: "Jaquetas & Moletons",
+    categoryName: "Jaquetas",
     variants: [
       { color: "Preto", price: 19999 },
       { color: "Branco", price: 19999 },
@@ -466,7 +466,7 @@ const products = [
     name: "Jaqueta Windrunner",
     description:
       "Jaqueta Windrunner com design clássico e proteção contra o vento.",
-    categoryName: "Jaquetas & Moletons",
+    categoryName: "Jaquetas",
     variants: [
       { color: "Azul", price: 22999 },
       { color: "Bege", price: 22999 },
@@ -476,7 +476,7 @@ const products = [
     name: "Jaqueta Style",
     description:
       "Jaqueta com estilo urbano e moderno, perfeita para compor looks casuais.",
-    categoryName: "Jaquetas & Moletons",
+    categoryName: "Jaquetas",
     variants: [
       { color: "Marrom", price: 17999 },
       { color: "Cinza", price: 17999 },
@@ -485,7 +485,7 @@ const products = [
   {
     name: "Jaqueta Nike Club",
     description: "Jaqueta Nike Club com qualidade premium e design atemporal.",
-    categoryName: "Jaquetas & Moletons",
+    categoryName: "Jaquetas",
     variants: [
       { color: "Azul", price: 25999 },
       { color: "Amarela", price: 25999 },
