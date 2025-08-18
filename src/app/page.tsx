@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import BrandList from "@/components/common/brand-list";
 import CategorySelector from "@/components/common/category-selector";
 import Footer from "@/components/common/footer";
 import { Header } from "@/components/common/header";
@@ -31,6 +32,8 @@ const Home = async () => {
             className="h-auto w-full"
           />
         </div>
+
+        <BrandList title="Marcas parceiras" />
 
         <ProductList products={products} title="Mais vendidos" />
 
