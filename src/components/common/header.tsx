@@ -1,13 +1,22 @@
 "use client";
 
-import { LogInIcon, LogOutIcon, MenuIcon } from "lucide-react";
+import {
+  HomeIcon,
+  LogInIcon,
+  LogOutIcon,
+  MenuIcon,
+  PackageIcon,
+  ShoppingBasketIcon,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 import { authClient } from "@/lib/auth-client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -18,7 +27,16 @@ import {
 import { Cart } from "./cart";
 
 export const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const { data: session } = authClient.useSession();
+  const categoriesLinks = [
+    { name: "Camisetas", slug: "camisetas" },
+    { name: "Bermudas & Shorts", slug: "bermudas" },
+    { name: "Calças", slug: "calas" },
+    { name: "Jaquetas & Moletons", slug: "jaquetas" },
+    { name: "Tênis", slug: "tnis" },
+    { name: "Acessórios", slug: "acessrios" },
+  ] as const;
   return (
     <header className="flex items-center justify-between p-5">
       <Link href="/">
@@ -26,7 +44,7 @@ export const Header = () => {
       </Link>
 
       <div className="flex items-center gap-3">
-        <Sheet>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">
               <MenuIcon />
@@ -77,6 +95,42 @@ export const Header = () => {
                   </Button>
                 </div>
               )}
+              <Separator className="my-4" />
+              <div className="flex flex-col gap-2">
+                <Button asChild variant="ghost" className="justify-start">
+                  <Link href="/">
+                    <HomeIcon className="mr-2 h-4 w-4" /> Início
+                  </Link>
+                </Button>
+                <Button asChild variant="ghost" className="justify-start">
+                  <Link href="/my-orders">
+                    <PackageIcon className="mr-2 h-4 w-4" /> Meus Pedidos
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="justify-start"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    window.dispatchEvent(new Event("cart:open"));
+                  }}
+                >
+                  <ShoppingBasketIcon className="mr-2 h-4 w-4" /> Carrinho
+                </Button>
+              </div>
+              <Separator className="my-4" />
+              <div className="flex flex-col gap-3">
+                {categoriesLinks.map((link) => (
+                  <Button
+                    key={link.slug}
+                    asChild
+                    variant="ghost"
+                    className="justify-start"
+                  >
+                    <Link href={`/category/${link.slug}`}>{link.name}</Link>
+                  </Button>
+                ))}
+              </div>
             </div>
           </SheetContent>
         </Sheet>

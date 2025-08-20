@@ -28,6 +28,7 @@ const AddToCartButton = ({
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
+      toast.success("Produto adicionado à sacola.");
     },
   });
   return (
