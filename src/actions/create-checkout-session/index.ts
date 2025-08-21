@@ -19,8 +19,9 @@ export const createCheckoutSession = async (
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error("Stripe secret key is not set");
   }
+  const headersList = await headers();
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: headersList,
   });
   if (!session?.user) {
     throw new Error("Unauthorized");
@@ -42,11 +43,19 @@ export const createCheckoutSession = async (
     },
   });
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const protocol = headersList.get("x-forwarded-proto") ?? "https";
+  const host = headersList.get("x-forwarded-host") ?? headersList.get("host");
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    (host ? `${protocol}://${host}` : undefined);
+  if (!appUrl) {
+    throw new Error("App URL is not set");
+  }
   const checkoutSession = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/cancel`,
+    success_url: `${appUrl}/checkout/success`,
+    cancel_url: `${appUrl}/checkout/cancel`,
     metadata: {
       orderId,
     },
