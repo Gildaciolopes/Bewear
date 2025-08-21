@@ -76,13 +76,6 @@ export const Header = () => {
                         </span>
                       </div>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => authClient.signOut()}
-                    >
-                      <LogOutIcon />
-                    </Button>
                   </div>
                 </>
               ) : (
@@ -97,19 +90,27 @@ export const Header = () => {
               )}
               <Separator className="my-4" />
               <div className="flex flex-col gap-2">
-                <Button asChild variant="ghost" className="justify-start">
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="justify-start hover:cursor-pointer"
+                >
                   <Link href="/">
                     <HomeIcon className="mr-2 h-4 w-4" /> Início
                   </Link>
                 </Button>
-                <Button asChild variant="ghost" className="justify-start">
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="justify-start hover:cursor-pointer"
+                >
                   <Link href="/my-orders">
                     <PackageIcon className="mr-2 h-4 w-4" /> Meus Pedidos
                   </Link>
                 </Button>
                 <Button
                   variant="ghost"
-                  className="justify-start"
+                  className="justify-start hover:cursor-pointer"
                   onClick={() => {
                     setMenuOpen(false);
                     window.dispatchEvent(new Event("cart:open"));
@@ -125,12 +126,26 @@ export const Header = () => {
                     key={link.slug}
                     asChild
                     variant="ghost"
-                    className="justify-start"
+                    className="justify-start hover:cursor-pointer"
                   >
                     <Link href={`/category/${link.slug}`}>{link.name}</Link>
                   </Button>
                 ))}
               </div>
+
+              {session?.user && (
+                <div className="mt-6">
+                  <Separator className="my-4" />
+                  <Button
+                    variant="outline"
+                    className="flex w-full items-center justify-center gap-2 hover:cursor-pointer"
+                    onClick={() => authClient.signOut()}
+                  >
+                    <LogOutIcon className="h-4 w-4" />
+                    Sair da conta
+                  </Button>
+                </div>
+              )}
             </div>
           </SheetContent>
         </Sheet>
