@@ -15,6 +15,7 @@ import { db } from "@/db";
 import { orderTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
+import { OpenCartButton } from "./components/open-cart-button";
 import Orders from "./components/orders";
 
 const MyOrdersPage = async () => {
@@ -65,6 +66,33 @@ const MyOrdersPage = async () => {
       },
     },
   });
+
+  if (orders.length === 0) {
+    return (
+      <>
+        <Header />
+        <div className="px-5 py-8">
+          <Card className="mx-auto max-w-2xl">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-bold text-gray-900">
+                Você ainda não tem pedidos
+              </CardTitle>
+              <CardDescription className="mt-2 text-gray-600">
+                Que tal começar suas compras? Adicione produtos ao carrinho e
+                finalize seu primeiro pedido!
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col justify-center gap-3 sm:flex-row">
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/">Ver produtos</Link>
+              </Button>
+              <OpenCartButton />
+            </CardContent>
+          </Card>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
