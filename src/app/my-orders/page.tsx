@@ -1,8 +1,16 @@
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 import { Header } from "@/components/common/header";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { db } from "@/db";
 import { orderTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
@@ -13,9 +21,36 @@ const MyOrdersPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+
   if (!session?.user.id) {
-    redirect("/login");
+    return (
+      <>
+        <Header />
+        <div className="px-5 py-8">
+          <Card className="mx-auto max-w-2xl">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-bold text-gray-900">
+                Acesse sua conta para ver seus pedidos
+              </CardTitle>
+              <CardDescription className="mt-2 text-gray-600">
+                Faça login ou crie uma conta para acompanhar todos os seus
+                pedidos e fazer novas compras
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col justify-center gap-3 sm:flex-row">
+              <Button asChild className="w-full sm:w-auto">
+                <Link href="/authentication">Fazer login</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <Link href="/authentication">Criar conta</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </>
+    );
   }
+
   const orders = await db.query.orderTable.findMany({
     where: eq(orderTable.userId, session?.user.id),
     with: {
